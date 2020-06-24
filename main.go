@@ -5,6 +5,8 @@ import (
 	"flag"
 	"fmt"
 	"github.com/Anderson-Lu/gofasion/gofasion"
+	"github.com/leaanthony/mewn"
+	"github.com/wailsapp/wails"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -78,7 +80,19 @@ Options:
 `)
 	flag.PrintDefaults()
 }
+
 func main() {
+	js := mewn.String("./frontend/dist/app.js")
+	css := mewn.String("./frontend/dist/app.css")
+	app := wails.CreateApp(&wails.AppConfig{
+		Width:  1024,
+		Height: 868,
+		Title:  "我的世界客户端下载",
+		JS:     js,
+		CSS:    css,
+		Colour: "#131313",
+	})
+	app.Run()
 	args := os.Args
 	if len(args) >= 2 {
 		flag.Parse()
