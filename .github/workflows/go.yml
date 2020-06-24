@@ -40,5 +40,5 @@ jobs:
       with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           tag: AtuoBuild
-          overwite: true
+          overwrite: true
           file: mcdownloader
