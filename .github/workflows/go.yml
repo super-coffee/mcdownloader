@@ -36,5 +36,6 @@ jobs:
     - name: Test
       run: go test -v .
     - name: Release
+      uses: mcdownloader/semantic-release-action@v2
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
