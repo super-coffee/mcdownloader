@@ -10,11 +10,13 @@ import './plugins/element.js'
 import router from './router'
 
 Wails.Init(() => {
-	new Vue({
+    new Vue({
         router,
         render: h => h(App),
-        data(){return{
-            from: 1
-        }}
+        data() {
+            return {
+                from: 1
+            }
+        }
     }).$mount('#app');
 });

@@ -27,7 +27,7 @@ module.exports = {
         limit: limit
       });
   },
-  css: cssConfig,
+
   configureWebpack: {
     output: {
       filename: "[name].js"
@@ -36,7 +36,11 @@ module.exports = {
       splitChunks: false
     }
   },
+
   devServer: {
 		disableHostCheck: true
-  }
+  },
+
+  publicPath: '',
+  productionSourceMap: false
 };
