@@ -26,7 +26,7 @@
                   <i class="el-icon-download">&nbsp;下载游戏</i>
                 </span>
               </el-menu-item>
-              <el-menu-item index="/about">
+              <el-menu-item index="/chooseMirror">
                 <i class="el-icon-download"></i>
                 <span slot="title">
                   <i class="el-icon-set-up">&nbsp;镜像源</i>
