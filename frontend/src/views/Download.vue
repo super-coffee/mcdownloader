@@ -12,17 +12,17 @@
       <el-table-column prop="releaseTime" label="发布时间"></el-table-column>
       <el-table-column label="操作">
         <el-button
+                size="mini"
+                type="primary"
+                icon="el-icon-download"
+                plain
+                @click="handleDelete(scope.$index, scope.row)"
+        >下载</el-button>
+        <el-button
           size="mini"
           icon="el-icon-magic-stick"
           @click="handleEdit(scope.$index, scope.row)"
         >修复</el-button>
-        <el-button
-          size="mini"
-          type="primary"
-          icon="el-icon-download"
-          plain
-          @click="handleDelete(scope.$index, scope.row)"
-        >下载</el-button>
       </el-table-column>
     </el-table>
     <el-pagination
