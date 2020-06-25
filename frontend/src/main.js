@@ -7,6 +7,7 @@ Vue.config.productionTip = false;
 Vue.config.devtools = true;
 
 import * as Wails from '@wailsapp/runtime';
+import './plugins/element.js'
 
 Wails.Init(() => {
 	new Vue({

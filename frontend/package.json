@@ -1,17 +1,20 @@
 {
   "name": "mcoo",
-  "author": "enjoy<enjoy@mcoo.pw>",
   "private": true,
+  "author": "enjoy<enjoy@mcoo.pw>",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@wailsapp/runtime": "^1.0.10",
     "core-js": "^3.6.4",
+    "element-ui": "^2.4.5",
+    "node-sass": "^4.14.1",
     "regenerator-runtime": "^0.13.3",
-    "vue": "^2.6.11",
-    "@wailsapp/runtime": "^1.0.10"
+    "sass-loader": "^8.0.2",
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.2.3",
@@ -21,6 +24,7 @@
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^6.2.1",
     "eventsource-polyfill": "^0.9.6",
+    "vue-cli-plugin-element": "^1.0.1",
     "vue-template-compiler": "^2.6.11",
     "webpack-hot-middleware": "^2.25.0"
   },

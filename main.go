@@ -80,7 +80,35 @@ Options:
 `)
 	flag.PrintDefaults()
 }
+func lists() interface{} {
 
+	rep, err := http.Get("http://launchermeta.mojang.com/mc/game/version_manifest.json")
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	var versions_json []map[string]string
+
+	b, _ := ioutil.ReadAll(rep.Body)
+	versions := gofasion.NewFasion(string(b))
+	versions.Get("versions").ArrayForEach(func(i int, version *gofasion.Fasion) {
+		_, id := version.Get("id").ValStr()
+		_, r_type := version.Get("type").ValStr()
+		_, releaseTime := version.Get("releaseTime").ValStr()
+
+		localtime,err:= time.ParseInLocation(time.RFC3339,releaseTime,time.Local)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		releaseTime = localtime.Format("2006-01-02 15:04:05")
+		tmp := map[string]string{
+			"releaseTime":releaseTime,
+			"versionId":id,
+			"type":r_type,
+		}
+		versions_json = append(versions_json, tmp)
+	})
+	return versions_json
+}
 func main() {
 	js := mewn.String("./frontend/dist/app.js")
 	css := mewn.String("./frontend/dist/app.css")
@@ -92,6 +120,7 @@ func main() {
 		CSS:    css,
 		Colour: "#131313",
 	})
+	app.Bind(lists)
 	app.Run()
 	args := os.Args
 	if len(args) >= 2 {
