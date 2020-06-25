@@ -26,7 +26,7 @@ var (
 	p   int
 	vid string
 )
-
+var serverid int = 1
 func urlReplace(url string, from int) string {
 	switch from {
 	case 0:
@@ -80,13 +80,20 @@ Options:
 `)
 	flag.PrintDefaults()
 }
+func setServerId(id int) bool {
+	serverid = id
+	return true
+}
+func getServerId() int {
+	return serverid
+}
 func lists() interface{} {
-
-	rep, err := http.Get("http://launchermeta.mojang.com/mc/game/version_manifest.json")
+	fmt.Println(serverid)
+	rep, err := http.Get(urlReplace("http://launchermeta.mojang.com/mc/game/version_manifest.json",serverid-1))
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-	var versions_json []map[string]string
+	var versions_json []map[string]interface{}
 
 	b, _ := ioutil.ReadAll(rep.Body)
 	versions := gofasion.NewFasion(string(b))
@@ -100,7 +107,8 @@ func lists() interface{} {
 			fmt.Println(err.Error())
 		}
 		releaseTime = localtime.Format("2006-01-02 15:04:05")
-		tmp := map[string]string{
+		tmp := map[string]interface{}{
+			"id":i+1,
 			"releaseTime":releaseTime,
 			"versionId":id,
 			"type":r_type,
@@ -121,6 +129,8 @@ func main() {
 		Colour: "#131313",
 	})
 	app.Bind(lists)
+	app.Bind(getServerId)
+	app.Bind(setServerId)
 	app.Run()
 	args := os.Args
 	if len(args) >= 2 {
