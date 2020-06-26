@@ -1,10 +1,17 @@
 <template>
     <div id="app">
-        <div>
+        <el-drawer
+                title="关于我们"
+                :visible.sync="drawer"
+                :with-header="false">
+            <span>Super Coffee</span>
+            <p>爱发电预留位</p>
+        </el-drawer>
+
             <el-container class="main">
                 <el-aside :width="tabWidth + 'px'">
                     <div>
-                        <div class="isClossTab" @click="isClossTabFun">
+                        <div class="isClossTab" @click="isCloseTabFun">
                             <i :class="isCollapse ? 'el-icon-d-arrow-right' : 'el-icon-d-arrow-left'"></i>
                         </div>
                         <el-menu
@@ -28,6 +35,11 @@
                                 <i class="el-icon-set-up"></i>
                                 <span slot="title">镜像源</span>
                             </el-menu-item>
+                            <el-menu-item @click="drawer = true">
+                                <i class="el-icon-coffee-cup"></i>
+                                <span slot="title">关于我们</span>
+                            </el-menu-item>
+
                         </el-menu>
                     </div>
                 </el-aside>
@@ -38,20 +50,18 @@
             >Minecraft Downloader</span>
                     </el-header>
 
-                    <router-view/>
+                    <router-view  :show-overflow-tooltip="true" />
                     <el-footer class="main-footer" height="50px">
                         <p>By Enjoy</p>
                     </el-footer>
                 </el-container>
             </el-container>
-        </div>
     </div>
 </template>
 <style lang="scss">
     #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+
         text-align: center;
         color: #2c3e50;
     }
@@ -73,11 +83,20 @@
     export default {
         name: "app",
         mounted() {
+            let that = this
+            window.onresize = function () {
+                if ( document.body.clientWidth <= 768){
+                    that.tabWidth = 64;
+                    that.isCollapse = true;
+                }
+            }
+
         },
         data() {
             return {
                 isCollapse: false,
-                tabWidth: 200
+                tabWidth: 200,
+                drawer: false,
             };
         },
         methods: {
@@ -87,7 +106,7 @@
             handleClose(key, keyPath) {
                 console.log(key, keyPath);
             },
-            isClossTabFun() {
+            isCloseTabFun() {
                 clearInterval(this.intelval);
                 if (!this.isCollapse) {
                     clearInterval(this.intelval);
@@ -104,6 +123,7 @@
             }
         }
     };
+
 </script>
 <style>
     * {

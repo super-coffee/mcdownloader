@@ -106,7 +106,7 @@ func lists() interface{} {
 		if err != nil {
 			fmt.Println(err.Error())
 		}
-		releaseTime = localtime.Format("2006-01-02 15:04:05")
+		releaseTime = localtime.Local().Format("2006-01-02 15:04:05")
 		tmp := map[string]interface{}{
 			"id":i+1,
 			"releaseTime":releaseTime,
@@ -126,7 +126,6 @@ func main() {
 		Title:  "我的世界客户端下载",
 		JS:     js,
 		CSS:    css,
-		Colour: "#131313",
 	})
 	app.Bind(lists)
 	app.Bind(getServerId)

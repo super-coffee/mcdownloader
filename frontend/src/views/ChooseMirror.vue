@@ -1,5 +1,5 @@
 <template>
-  <el-main>
+  <el-main :show-overflow-tooltip="true">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>选择下载源</span>
