@@ -1,23 +1,43 @@
 <template>
-  <el-main :show-overflow-tooltip="true">
-    <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span>选择下载源</span>
-      </div>
-      <el-form>
-        <el-form-item>
-          <el-radio-group v-model="id">
-            <el-radio-button :label="1">Mojang</el-radio-button>
-            <el-radio-button :label="2">BMCL</el-radio-button>
-            <el-radio-button :label="3">MCBBS</el-radio-button>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item>
-          <el-button style="float: right;" @click="setServerId(id)" type="primary" round>保存</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
-  </el-main>
+  <a-card title="选择下载源">
+    <a-form-model-item prop="region">
+    <a-radio-group class="ant-radio-button" v-model="id">
+      <a-radio-button :value="1">
+        Mojang
+      </a-radio-button>
+      <a-radio-button :value="2">
+        BMCL
+      </a-radio-button>
+      <a-radio-button :value="3">
+        MCBBS
+      </a-radio-button>
+    </a-radio-group>
+    </a-form-model-item>
+    <a-form-model-item>
+      <a-button type="primary" @click="setServerId(id)" >
+        保存
+      </a-button>
+    </a-form-model-item>
+  </a-card>
+<!--  <el-main :show-overflow-tooltip="true">-->
+<!--    <el-card class="box-card">-->
+<!--      <div slot="header" class="clearfix">-->
+<!--        <span>选择下载源</span>-->
+<!--      </div>-->
+<!--      <el-form>-->
+<!--        <el-form-item>-->
+<!--          <el-radio-group v-model="id">-->
+<!--            <el-radio-button :label="1">Mojang</el-radio-button>-->
+<!--            <el-radio-button :label="2">BMCL</el-radio-button>-->
+<!--            <el-radio-button :label="3">MCBBS</el-radio-button>-->
+<!--          </el-radio-group>-->
+<!--        </el-form-item>-->
+<!--        <el-form-item>-->
+<!--          <el-button style="float: right;" @click="setServerId(id)" type="primary" round>保存</el-button>-->
+<!--        </el-form-item>-->
+<!--      </el-form>-->
+<!--    </el-card>-->
+<!--  </el-main>-->
 </template>
 
 <script>
@@ -40,15 +60,9 @@ export default {
     setServerId(id) {
       window.backend.setServerId(id).then(result => {
         if (result === true) {
-          this.$message({
-            message: "设置成功",
-            type: "success"
-          });
+          this.$message.success("设置成功");
         } else {
-          this.$message({
-            message: "设置失败",
-            type: "danger"
-          });
+          this.$message.error("设置失败");
         }
       });
     },

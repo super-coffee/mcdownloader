@@ -5,11 +5,12 @@ import App from './App.vue';
 
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
-
+import Antd from 'ant-design-vue';
 import * as Wails from '@wailsapp/runtime';
-import './plugins/element.js'
 import router from './router'
+import 'ant-design-vue/dist/antd.css';
 
+Vue.use(Antd);
 Wails.Init(() => {
     new Vue({
         router,
@@ -18,6 +19,7 @@ Wails.Init(() => {
             return {
                 from: 1
             }
-        }
+        },
+        template: '<App/>',
     }).$mount('#app');
 });
